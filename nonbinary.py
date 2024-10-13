@@ -239,6 +239,19 @@ class TreeVec:
                     relabeled_segment2.append(map1[segment2[i2]])
             return relabeled_segment2
         
+        def __Partition(segment1, segment2):
+            result = []
+            for A in segment1:
+                remaining_elements = A.copy()  
+                for B in segment2:
+                    intersection = A & B  
+                    if intersection:
+                        result.append(intersection)  
+                    remaining_elements -= intersection  
+                if remaining_elements:
+                    result.append(remaining_elements)  
+            return result
+    
         v1,v2 = self.vector,t2.vector
         n=0
         for i in range(0,len(v1)):
