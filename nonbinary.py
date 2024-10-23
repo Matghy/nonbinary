@@ -276,6 +276,22 @@ class TreeVec:
             if leaf2:
                 boundaries[2].append([i2,i-1])
                 i2 = i+1
+        
+        def nonbin_sim():
+            lcs_len,lcs_seq = 0,[]
+            for j in range(0,n):
+                b1_start,b1_end = boundaries[1][j][0], boundaries[1][j][1]
+                b2_start,b2_end = boundaries[2][j][0], boundaries[2][j][1]
+                # Checking that both segments are non-empty (otherwise, no LCS)
+                if (b1_end>=b1_start) and (b2_end>=b2_start):
+                    # Segments of v1 and v2 to consider
+                    __segment1 = [v1[k][0] for k in range(b1_start, b1_end+1)] 
+                    __segment2 = [v2[k][0] for k in range(b2_start, b2_end+1)] 
+                    # Relabeling __segment2 according to __map1,
+                    # excluding labels not in __segment1            
+                    segment2 = __Partition(__segment1, __segment2)
+                    
+        
         # Computes an LCS for each pair of segments using an LIS algorithm
         lcs_len,lcs_seq = 0,[]
         for j in range(0,n):
